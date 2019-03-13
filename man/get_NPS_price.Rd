@@ -7,13 +7,6 @@
 get_NPS_price(query_start = "2019-01-01 00:00",
   query_end = "2019-01-02 00:00")
 }
-\arguments{
-\item{query_start}{Start datetime to the minute, %Y-%m-%d %H:%M, e.g. '2019-01-01 00:00'}
-
-\item{query_end}{End datetime to the minute, e.g. '2019-01-02 00:00'}
-}
 \description{
-Receive NPS data for EE, LV, LT and FI
+Get NPS price data
 }
-\keyword{NPS}
-\keyword{price}

@@ -1,12 +1,7 @@
 
 #' Get NPS price data
 #'
-#' Receive NPS data for EE, LV, LT and FI
-#' @param query_start Start datetime to the minute, %Y-%m-%d %H:%M, e.g. '2019-01-01 00:00'
-#' @param query_end End datetime to the minute, e.g. '2019-01-02 00:00'
-#' @keywords NPS price
 #' @export
-#' @import tidyr
 #' @import dplyr
 #' @import httr
 

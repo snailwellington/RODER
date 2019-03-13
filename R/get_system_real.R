@@ -1,32 +1,31 @@
 
 
-#' Get NPS turnover data
+
+#' Get System real data
 #'
 #'
 #' @export
 #' @import dplyr
 #' @import httr
-
-
-
-get_NPS_turnover <- function(query_start = '2019-01-01 00:00',query_end = '2019-01-02 00:00'){
+#'
+get_system_real <- function(query_start = '2019-01-01 00:00',query_end = '2019-01-02 00:00'){
 
 
   ## Defined GET address
-  URL <- "http://dashboard.elering.ee/api/nps/turnover?start=&end="
+  URL <- "http://dashboard.elering.ee/api/system/with-plan?start=&end="
 
   ## GET data with httr
   json_data <- httr::GET(URL,
                          query= list(start = query_start,end = query_end))
 
   ## turn data to dataframe and reformat to datetime series
-  dataset <- jsonlite::fromJSON(json_data$url)$data %>%
+  dataset_real <- jsonlite::fromJSON(json_data$url)$data[1] %>%
     as.data.frame() %>%
-    select(ee.timestamp,2:3,5:6,8:9,11:12) %>%
-    rename(datetime = ee.timestamp) %>%
+    rename(datetime = real.timestamp) %>%
     mutate(datetime = as.POSIXct(datetime,tz = "GMT", origin="1970-01-01"))
 
   ## return output
-  return(dataset)
+  return(dataset_real)
+
 }
 

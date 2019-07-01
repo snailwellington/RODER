@@ -7,7 +7,7 @@
 
 
 
-get_NPS_price <- function(query_start = '2019-01-01 00:00',query_end = '2019-01-02 00:00'){
+get_NPS_price <- function(query_start = paste(Sys.Date()-31,"00:00"),query_end = paste(Sys.Date()-1,"00:00")){
 
 
   ## Defined GET address
@@ -22,7 +22,7 @@ get_NPS_price <- function(query_start = '2019-01-01 00:00',query_end = '2019-01-
     as.data.frame() %>%
     select(fi.timestamp,fi.price,ee.price,lv.price,lt.price) %>%
     rename(datetime = fi.timestamp) %>%
-    mutate(datetime = as.POSIXct(datetime,tz = "GMT", origin="1970-01-01"))
+    mutate(datetime = as.POSIXct(datetime,tz = "", origin="1970-01-01"))
 
   ## return output
   return(dataset)

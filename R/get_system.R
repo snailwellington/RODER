@@ -7,7 +7,7 @@
 #' @import httr
 
 
-get_system <- function(query_start = '2019-01-01 00:00',query_end = '2019-01-02 00:00'){
+get_system <- function(query_start = paste(Sys.Date()-31,"00:00"),query_end = paste(Sys.Date()-1,"00:00")){
 
 
   ## Defined GET address
@@ -20,7 +20,7 @@ get_system <- function(query_start = '2019-01-01 00:00',query_end = '2019-01-02 
   ## turn data to dataframe and reformat to datetime series
   dataset <- jsonlite::fromJSON(json_data$url)$data %>%
     rename(datetime = timestamp) %>%
-    mutate(datetime = as.POSIXct(datetime,tz = "GMT", origin="1970-01-01"))
+    mutate(datetime = as.POSIXct(datetime,tz = "", origin="1970-01-01"))
 
   ## return output
   return(dataset)

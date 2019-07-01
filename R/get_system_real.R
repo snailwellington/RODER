@@ -8,7 +8,7 @@
 #' @import dplyr
 #' @import httr
 #'
-get_system_real <- function(query_start = '2019-01-01 00:00',query_end = '2019-01-02 00:00'){
+get_system_real <- function(query_start = paste(Sys.Date()-31,"00:00"),query_end = paste(Sys.Date()-1,"00:00")){
 
 
   ## Defined GET address
@@ -22,7 +22,7 @@ get_system_real <- function(query_start = '2019-01-01 00:00',query_end = '2019-0
   dataset_real <- jsonlite::fromJSON(json_data$url)$data[1] %>%
     as.data.frame() %>%
     rename(datetime = real.timestamp) %>%
-    mutate(datetime = as.POSIXct(datetime,tz = "GMT", origin="1970-01-01"))
+    mutate(datetime = as.POSIXct(datetime,tz = "", origin="1970-01-01"))
 
   ## return output
   return(dataset_real)

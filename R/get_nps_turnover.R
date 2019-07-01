@@ -9,7 +9,7 @@
 
 
 
-get_NPS_turnover <- function(query_start = '2019-01-01 00:00',query_end = '2019-01-02 00:00'){
+get_NPS_turnover <- function(query_start = paste(Sys.Date()-31,"00:00"),query_end = paste(Sys.Date()-1,"00:00")){
 
 
   ## Defined GET address
@@ -24,7 +24,7 @@ get_NPS_turnover <- function(query_start = '2019-01-01 00:00',query_end = '2019-
     as.data.frame() %>%
     select(ee.timestamp,2:3,5:6,8:9,11:12) %>%
     rename(datetime = ee.timestamp) %>%
-    mutate(datetime = as.POSIXct(datetime,tz = "GMT", origin="1970-01-01"))
+    mutate(datetime = as.POSIXct(datetime,tz = "", origin="1970-01-01"))
 
   ## return output
   return(dataset)
